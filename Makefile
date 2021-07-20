@@ -2,19 +2,10 @@ entitlements = en.plist
 name = tst
 BUILD = .build
 packagename = tst
-files =  appdelegate.m rvc.xm main.m
-flags = -I$(THEOS)/include -fobjc-arc
-ldflags = -lsubstrate
-frameworks = UIKit Foundation AudioToolbox IOKit
-installdir = /Applications/tst.app
+files =  appdelegate.m rvc.mm main.m socketFromServer.m
+flags = -I$(THEOS)/include -fobjc-arc -I/usr/include -I. -fvisibility=hidden
+ldflags = -L/usr/local/include -linject
+frameworks = UIKit Foundation AudioToolbox IOKit AppSupport
+type = app
 include /opt/theos/makefiles/jk.mk
-
-package: $(BINARYDIR)/$(name)
-	@mkdir -p $(BUILD)/$(packagename)/DEBIAN
-	@cp control $(BUILD)/$(packagename)/DEBIAN/control
-	@cp Resources/* $(BUILD)/$(packagename)/$(installdir)/
-	@dpkg-deb --build $(BUILD)/$(packagename)
-
-install:
-	@dpkg -i $(BUILD)/$(packagename).deb
 

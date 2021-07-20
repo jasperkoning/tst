@@ -1,3 +1,6 @@
+
+#include <inject.h>
+
 //#import "../DVirtualHome/DVirtualHome.h"
 #import "appdelegate.h"
 
